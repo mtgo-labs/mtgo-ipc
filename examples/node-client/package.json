@@ -1,0 +1,7 @@
+{
+	"name": "node-client",
+	"private": true,
+	"scripts": {
+		"start": "bun client.ts"
+	}
+}

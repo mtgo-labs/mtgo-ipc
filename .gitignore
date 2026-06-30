@@ -1,0 +1,31 @@
+# Binaries
+/bin/
+/mtgo-ipc
+*.exe
+
+# Unix socket (created at runtime)
+*.sock
+
+# Local runtime data
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Secrets — environment files carry tokens/credentials and must never be committed
+.env
+.env.*
+!.env.example
+
+# Editor / OS
+.idea/
+.vscode/
+.DS_Store
+*.swp
+
+# CodeGraph (local semantic index)
+.codegraph/
+
+# Test artifacts
+coverage.out
+*.prof
