@@ -1,7 +1,9 @@
-github.com/klauspost/compress v1.19.0 h1:sXLILfc9jV2QYWkzFOPWStmcUVH2RHEB1JCdY2oVvCQ=
-github.com/klauspost/compress v1.19.0/go.mod h1:cwPg85FWrGar70rWktvGQj8/hthj3wpl0PGDogxkrSQ=
-github.com/mtgo-labs/mtgo v0.15.0 h1:V73FZLW11oMT7cyeDMViEf4Lp+Fdvx/dxLXwtY/rFZU=
-github.com/mtgo-labs/mtgo v0.15.0/go.mod h1:YcGcTRzDQVeFqahfa5c5L6/pCxjTPMnblDTwRI/pKes=
+github.com/klauspost/compress v1.19.1 h1:VsB4HPswih7mmZ8WleSFQ75c/Ui1M4trX5oAsJnhSlk=
+github.com/klauspost/compress v1.19.1/go.mod h1:cwPg85FWrGar70rWktvGQj8/hthj3wpl0PGDogxkrSQ=
+github.com/mtgo-labs/mtgo v0.16.1 h1:mndFRqbQp7Z5exiYmMIkk6ovArpAMhQTSvRVO9FCfyQ=
+github.com/mtgo-labs/mtgo v0.16.1/go.mod h1:Ic/iVnNWuKAee/FTsA23MCuasar3aEeA2hmdm1BIEzc=
+github.com/mtgo-labs/session-converter v0.5.0 h1:NO2uPzSaxed7t1+snRLtRopC5jhmlTDwkj0wJcV+lGY=
+github.com/mtgo-labs/session-converter v0.5.0/go.mod h1:C7Ox25A0ZAIngpbZxUs9a1UA/FBGI5Jsq95MjFB4plw=
 github.com/mtgo-labs/storage v0.5.0 h1:x6asAZcLpfhqxEjR6kP4l42246R9XodZGawXsLWLuq8=
 github.com/mtgo-labs/storage v0.5.0/go.mod h1:sBMyZUmM0laJr1Zx4bAyYeQ6jpMCZJ64WPHcL8kNj70=
 go.uber.org/goleak v1.3.0 h1:2K3zAYmnTNqV73imy9J1T3WC+gmCePx2hEGkimedGto=
