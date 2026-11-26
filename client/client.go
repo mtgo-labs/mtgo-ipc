@@ -24,6 +24,24 @@ type Config struct {
 	BotToken string
 }
 
+// reqTimeout is how long mtgo waits for a Telegram response per RPC attempt.
+//
+// IPC requests carry no deadline, so every telegram.invoke runs under mtgo's
+// ReqTimeout. mtgo v0.19+ defaults that to 15s (down from 60s), which fails
+// slow-but-healthy calls — e.g. upload.getFile parts on a weak link — that
+// used to succeed. Pin the 60s window this bridge has always had.
+const reqTimeout = 60 * time.Second
+
+// mtgoConfig maps connect credentials onto an mtgo client config.
+func mtgoConfig(cfg Config) *telegram.Config {
+	return &telegram.Config{
+		SessionString: cfg.Session,
+		BotToken:      cfg.BotToken,
+		InMemory:      true,
+		ReqTimeout:    reqTimeout,
+	}
+}
+
 // Client wraps a single mtgo telegram.Client. The mtgo client is nil until
 // Connect is called with credentials.
 type Client struct {
@@ -64,26 +82,13 @@ func (c *Client) Connect(ctx context.Context, cfg Config) error {
 		return fmt.Errorf("client: api_id and api_hash are required")
 	}
 
-	tg, err := telegram.NewClient(int32(cfg.APIID), cfg.APIHash, &telegram.Config{
-		SessionString: cfg.Session,
-		BotToken:      cfg.BotToken,
-		InMemory:      true,
-	})
+	tg, err := telegram.NewClient(int32(cfg.APIID), cfg.APIHash, mtgoConfig(cfg))
 	if err != nil {
 		return fmt.Errorf("create mtgo client: %w", err)
 	}
 
 	if c.updateHandler != nil {
-		tg.OnRawUpdate(func(ctx *telegram.Context) {
-			if ctx.Update == nil || ctx.Update.Raw == nil {
-				return
-			}
-			data, err := encodeTLToJSON(ctx.Update.Raw)
-			if err != nil {
-				return
-			}
-			c.updateHandler(data)
-		})
+		tg.OnRawUpdate(c.handleRawUpdate)
 	}
 
 	c.tg = tg
@@ -99,6 +104,19 @@ func (c *Client) Close() error {
 		return nil
 	}
 	return c.tg.Disconnect()
+}
+
+// handleRawUpdate encodes a raw Telegram update as JSON and hands it to the
+// handler registered with OnRawUpdate.
+func (c *Client) handleRawUpdate(ctx *telegram.Context) {
+	if c.updateHandler == nil || ctx.Update == nil || ctx.Update.Raw == nil {
+		return
+	}
+	data, err := encodeTLToJSON(ctx.Update.Raw)
+	if err != nil {
+		return
+	}
+	c.updateHandler(data)
 }
 
 // Info returns metadata about the build and connection state.
