@@ -8,7 +8,7 @@ or tool can drive Telegram without importing Go.
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![Go Reference](https://pkg.go.dev/badge/github.com/mtgo-labs/mtgo-ipc.svg)](https://pkg.go.dev/github.com/mtgo-labs/mtgo-ipc)
-[![mtgo](https://img.shields.io/badge/mtgo-v0.11.0-00ADD8)](https://github.com/mtgo-labs/mtgo)
+[![mtgo](https://img.shields.io/badge/mtgo-v0.25.0-00ADD8)](https://github.com/mtgo-labs/mtgo)
 
 </div>
 
@@ -128,7 +128,7 @@ response, over a Unix socket.
 
 ### Prerequisites
 
-- Go 1.26+
+- Go 1.26.2+
 - Telegram API credentials from [my.telegram.org](https://my.telegram.org)
 - A bot token (from [@BotFather](https://t.me/BotFather)) or a session string
 
@@ -496,7 +496,7 @@ mtgo-ipc/
 │   ├── python/          Python client (stdlib)
 │   └── lua/             Lua client (LuaSocket + dkjson)
 ├── docs/                Architecture diagram + protocol reference
-├── go.mod               github.com/mtgo-labs/mtgo v0.11.0 (no replace)
+├── go.mod               github.com/mtgo-labs/mtgo v0.25.0 (no replace)
 └── README.md
 ```
 
@@ -534,7 +534,7 @@ mtgo-ipc/
   `auth.status`, `telegram.invoke`, `updates.subscribe`, `updates.unsubscribe`
 - ✅ Raw update streaming (push events to subscribed clients)
 - ✅ Per-client bounded queues with slow-reader drop policy
-- ✅ Real mtgo v0.11.0 integration (bot token + session string auth)
+- ✅ Real mtgo v0.25.0 integration (bot token + session string auth)
 - ✅ Multi-client concurrent connections (each can subscribe independently)
 - ✅ Graceful shutdown (SIGINT/SIGTERM)
 - ✅ Client examples: Go, Bun/TypeScript, Python, Lua
